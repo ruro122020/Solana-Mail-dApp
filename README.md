@@ -103,6 +103,14 @@ EVERYTHING IS AN ACCOUNT IN SOLANA.
 
 1. The `From` trait is very usefule when performing error handling by allowing a function to return a single error type that encapsulate multiple error types. Go [here](https://doc.rust-lang.org/std/convert/trait.From.html) for more info.
 
+## Processor, part 1
+
+1. In `entrypoint.rs` module the `process()` method is going to handle every request sent to our program. To accomplish this we pass the reference to the slice holding the `instruction_data` to the `unpacked()` method of `MailInstruction`. The `instruction_data` is from the `process_instruction()` function in the `entrypoint.rs` module.
+
+We then use `match` to decide which request we are responding to, and the right method to call using the enum that was returned from the call to `unpack()`.
+
+2.  > See processor.rs for reference
+
 ### Environment Setup
 
 1. Install Rust from https://rustup.rs/
