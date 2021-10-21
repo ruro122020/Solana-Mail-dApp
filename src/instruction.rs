@@ -11,7 +11,7 @@ pub enum MailInstruction{
     pub fn unpack(input: &[8]) -> Result<Self, ProgramError> {
         //tag is assigned the first element returned from split_first
         //rest is the rest of the elements that was returned from split_first
-        let (tag, rest) = input.split_first().ok_or(InvalidInstruction)?;
+        let (tag, rest) = input.split_first().ok_or(InvalidInstruction)?; //The From trait in `error.rs` used the `?` operator to return an error 
 
         Ok(match tag {
             0 => Self::InitAccount,

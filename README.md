@@ -1,36 +1,5 @@
 # Notes
 
-## Rust
-
-1. In `state.rs` we use vectors for MailAccounts.
-   - A vector allows us to store more than one value in a single data structure that puts all the values next to each other in memory.
-   - Vectors can only store values of the same type. If Rust allowed a vector to hold any type, there would be a chance that one or more of the types would cause errors with the operations performed on the elements of the vector.
-   - Vectors are useful in situation in which you have a list of items.
-2. In `instruction.rs` the `Self` keyword is used to refer to the implementing type within [traits](https://doc.rust-lang.org/reference/items/traits.html) and (implementations)[https://doc.rust-lang.org/reference/items/implementations.html].
-
-- `Self` can only be used as the first segment, without a preceding `::`
-  ```
-  trait T {
-   type Item;
-   const C: i32;
-   // `Self` will be whatever type that implements `T`.
-   fn new() -> Self;
-   // `Self::Item` will be the type alias in the implementation.
-   fn f(&self) -> Self::Item;
-  }
-  struct S;
-  impl T for S {
-   type Item = i32;
-   const C: i32 = 9;
-   fn new() -> Self {           // `Self` is the type `S`.
-       S
-   }
-   fn f(&self) -> Self::Item {  // `Self::Item` is the type `i32`.
-       Self::C                  // `Self::C` is the constant value `9`.
-   }
-  }
-  ```
-
 ## entrypoint, programs, and accounts
 
 1. The `entrypoint` is the programs point of entry
@@ -90,14 +59,49 @@ EVERYTHING IS AN ACCOUNT IN SOLANA.
 
 ## State, part 1
 
-4. Data in accounts are stored in Uint8Array format. This means if we want to store the string "Solana is awesome" in an
+1. Data in accounts are stored in Uint8Array format. This means if we want to store the string "Solana is awesome" in an
    account's data, we will need to serialize the string. This is done by converting each character in the string to decimals following the UTF-8 format. For example, the string "Solana is awesome" will be serialized into a Uint8Array as "[83, 111, 108, 97, 110, 97, 32, 105, 115, 32, 97, 119, 101, 115, 111, 109, 101]"
 
-5. To serialize data in an account we use the Borch crate.
+2. To serialize data in an account we use the Borch crate.
+
+3. In `state.rs` we use vectors for MailAccounts.
+   - A vector allows us to store more than one value in a single data structure that puts all the values next to each other in memory.
+   - Vectors can only store values of the same type. If Rust allowed a vector to hold any type, there would be a chance that one or more of the types would cause errors with the operations performed on the elements of the vector.
+   - Vectors are useful in situation in which you have a list of items.
 
 ## Entrypoint
 
+## Instruction, part 1
+
+1. In `instruction.rs` the `Self` keyword is used to refer to the implementing type within [traits](https://doc.rust-lang.org/reference/items/traits.html) and (implementations)[https://doc.rust-lang.org/reference/items/implementations.html].
+
+   - `Self` can only be used as the first segment, without a preceding `::`
+
+   ```
+   trait T {
+      type Item;
+      const C: i32;
+      // `Self` will be whatever type that implements `T`.
+      fn new() -> Self;
+      // `Self::Item` will be the type alias in the implementation.
+      fn f(&self) -> Self::Item;
+   }
+   struct S;
+   impl T for S {
+      type Item = i32;
+      const C: i32 = 9;
+      fn new() -> Self {           // `Self` is the type `S`.
+         S
+      }
+      fn f(&self) -> Self::Item {  // `Self::Item` is the type `i32`.
+         Self::C                  // `Self::C` is the constant value `9`.
+      }
+   }
+   ```
+
 ## Error
+
+1. The `From` trait is very usefule when performing error handling by allowing a function to return a single error type that encapsulate multiple error types. Go [here](https://doc.rust-lang.org/std/convert/trait.From.html) for more info.
 
 ### Environment Setup
 
