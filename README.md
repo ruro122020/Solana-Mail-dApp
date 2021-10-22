@@ -1,5 +1,7 @@
 # Notes
 
+[Link to the tutorital](https://learn.figment.io/tutorials/create-a-fullstack-mail-dapp-on-solana)
+
 ## entrypoint, programs, and accounts
 
 1. The `entrypoint` is the programs point of entry
@@ -110,6 +112,8 @@ EVERYTHING IS AN ACCOUNT IN SOLANA.
 We then use `match` to decide which request we are responding to, and the right method to call using the enum that was returned from the call to `unpack()`.
 
 2.  > See processor.rs for reference
+
+## Instruction, part 2
 
 ### Environment Setup
 
