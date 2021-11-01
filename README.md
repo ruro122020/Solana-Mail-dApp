@@ -115,6 +115,8 @@ We then use `match` to decide which request we are responding to, and the right 
 
 ## Instruction, part 2
 
+## Processor, part 2
+
 ### Environment Setup
 
 1. Install Rust from https://rustup.rs/
